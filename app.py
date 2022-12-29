@@ -117,7 +117,7 @@ with col3:
 # Store the user input in a data frame
 df = pd.DataFrame(
     np.array([[gender, ssc_p, ssc_b, hsc_p, hsc_b, hsc_s, degree_p, degree_t, workex, etest_p, specialisation, mba_p, status, salary]]), 
-    columns=['gender', 'ssc_p', 'ssc_b', 'hsc_p', 'hsc_b', 'hsc_s', 'degree_p', 'degree_t', 'workex', 'etest_p', 'specialisation', 'mba_p', 'status', 'salary'])
+    columns=['Gender', '10th%', 'ssc_b', '12th%', 'hsc_b', 'hsc_s', 'graduation%', 'degree_t', 'workex', 'Employee_test%', 'specialisation', 'mba_p', 'status', 'salary'])
 
 st.caption("Your details are:")
 st.table(df)
