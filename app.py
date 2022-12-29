@@ -117,7 +117,7 @@ pipe = open('pipeline.pkl', 'rb')
 pipeline = pickle.load(pipe)
 
 # Prediction
-if st.button("Predict"):
+if st.button("Predict Placement"):
     # Transform the data
     data_transformed = pipeline.transform(df)
     prediction = pickle_model.predict(data_transformed)
