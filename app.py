@@ -15,13 +15,13 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: center; color: black;'>Campus Placement Prediction</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: white;'>Campus Placement Prediction</h1>", unsafe_allow_html=True)
 
 # Load the data
 data = pd.read_csv('train.csv')
 
-st.markdown("<h4 style='text-align: center; color: black;'>Student Details</h4>", unsafe_allow_html=True)
-st.markdown("<h5 style='text-align: center; color: black;'>Please enter student details for placement prediction</h5>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center; color: white;'>Student Details</h4>", unsafe_allow_html=True)
+st.markdown("<h5 style='text-align: center; color: white;'>Please enter student details for placement prediction</h5>", unsafe_allow_html=True)
 
 
 col1, col2, col3 = st.columns(3, gap="large")
@@ -123,5 +123,5 @@ if st.button("Predict"):
     prediction = pickle_model.predict(data_transformed)
     st.success('The student will {} get placed'.format(prediction))
 
-st.markdown("<h5 style='text-align: center; color: black;'>About The Model</h5>", unsafe_allow_html=True)
-st.markdown("<h6 style='text-align: center; color: black;'>This model is built using Support Vector Classifier(SVC) algorithm</h6>", unsafe_allow_html=True)
+st.markdown("<h5 style='text-align: center; color: white;'>About The Model</h5>", unsafe_allow_html=True)
+st.markdown("<h6 style='text-align: center; color: white;'>This model is built using Support Vector Classifier(SVC) algorithm</h6>", unsafe_allow_html=True)
