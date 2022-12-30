@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle 
-import base64
 
 st.set_page_config(layout="wide")
 
@@ -110,9 +109,9 @@ if st.button("Predict Placement"):
     prediction = pickle_model.predict(data_transformed)
     
     if prediction == 0:
-        st.warning('Prediction = {} The student will not get placed'.format(prediction), icon="⚠️")
+        st.success('The student will Not {} get placed'.format(prediction))
     else:
-        st.success('Prediction = {} The student will get placed'.format(prediction), icon="✅")
+        st.success('The student will {} get placed'.format(prediction))
         
 
 st.markdown("<h5 style='text-align: center; color: white;'>About The Model</h5>", unsafe_allow_html=True)
