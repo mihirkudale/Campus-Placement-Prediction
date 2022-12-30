@@ -17,20 +17,18 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 st.markdown("<h1 style='text-align: center; color: white;'>Campus Placement Prediction</h1>", unsafe_allow_html=True)
 
-# Load the data
-data = pd.read_csv('train.csv')
-
 st.markdown("<h4 style='text-align: center; color: white;'>Student Details</h4>", unsafe_allow_html=True)
-st.markdown("<h5 style='text-align: center; color: white;'>Please enter student details for placement prediction</h5>", unsafe_allow_html=True)
-
+st.markdown("<h5 style='text-align: center; color: white;'>Please enter student details for placement prediction</h5><br>", unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns(3, gap="large")
 
 with col1:
     gender = st.selectbox("**Gender**", ("M","F"))
     if gender == 'M':
+        gender = 0
         st.write("Gender:",'**Male**')
     else:
+        gender = 1
         st.write("Gender:",'**Female**')
         
     ssc_p = st.number_input('**Secondary Education percentage- 10th Grade**', min_value=0, max_value=100)
@@ -44,14 +42,14 @@ with col1:
         
     hsc_p = st.number_input('**Higher Secondary Education percentage- 12th Grade**', min_value=0, max_value=100)
     st.write('12th Grade Percentage:',hsc_p)
-    
+
+with col2:    
     hsc_b = st.selectbox("**Board of Education(12th grade)**", ('Central', 'Others'))
     if hsc_b == 'Central':
         st.write("Board in 12th grade:",'**Central**')
     else:
         st.write("Board in 12th grade:",'**Others**')
-
-with col2:    
+    
     hsc_s = st.selectbox("**Specialization in Higher Secondary Education(12th Grade)**", ('Science', 'Commerce', 'Other'))
     if hsc_s == 'Science':
         st.write("Specialization in 12th Gorade:", '**Science**')
@@ -71,6 +69,8 @@ with col2:
     else:
         st.write("Degree Type:", '**Others**')
         
+    
+with col3:       
     workex = st.selectbox("**Work Experience**", ('Yes', 'No'))
     if workex == 'Yes':
         st.write("Gender:",'**Male**')
@@ -79,30 +79,17 @@ with col2:
     
     etest_p = st.number_input('**Employability test percentage ( conducted by college)**', min_value=0, max_value=100)
     st.write('Employability test percentage:',etest_p)
-    
-with col3:       
+
     specialisation = st.selectbox("**Post Graduation(MBA)- Specialization**", ('Mkt&HR', 'Mkt&Fin'))
     if specialisation == 'Mkt&HR':
         st.write("MBA- Specialization:",'**Mkt&HR**')
     else:
         st.write("MBA- Specialization:",'**Mkt&Fin**')
-        
-    mba_p = st.number_input('**MBA percentage**', min_value=0, max_value=100)
-    st.write('MBA percentage:',mba_p)
-    
-    status = st.selectbox("**Status of placement**", ('Placed', 'Not Placed'))
-    if status == 'Placed':
-        st.write("Status of placement:",'**Placed**')
-    else:
-        st.write("Status of placement:",'**Not Placed**')
-    
-    salary = st.number_input('**Salary offered by corporate to candidates**', min_value=0)
-    st.write('Salary offered:',salary)
-    
+            
 # Store the user input in a data frame
 df = pd.DataFrame(
-    np.array([[gender, ssc_p, ssc_b, hsc_p, hsc_b, hsc_s, degree_p, degree_t, workex, etest_p, specialisation, mba_p, status, salary]]), 
-    columns=['Gender', '10th%', 'ssc_b', '12th%', 'hsc_b', 'hsc_s', 'graduation%', 'degree_t', 'workex', 'Employee_test%', 'specialisation', 'mba_p', 'status', 'salary'])
+    np.array([[gender, ssc_p, ssc_b, hsc_p, hsc_b, hsc_s, degree_p, degree_t, workex, etest_p, specialisation]]), 
+    columns=['Gender', '10th%', '10th_board', '12th%', '12th_board', '12th_specialization', 'graduation%', 'graduation_deg', 'Work_experience', 'Employee_test%', 'MBA_specialization'])
 
 st.caption("Your details are:")
 st.table(df)
@@ -121,7 +108,12 @@ if st.button("Predict Placement"):
     # Transform the data
     data_transformed = pipeline.transform(df)
     prediction = pickle_model.predict(data_transformed)
-    st.success('The student will {} get placed'.format(prediction))
+    
+    if prediction == 0:
+        st.warning('Prediction = {} The student will not get placed'.format(prediction), icon="⚠️")
+    else:
+        st.success('Prediction = {} The student will get placed'.format(prediction), icon="✅")
+        
 
 st.markdown("<h5 style='text-align: center; color: white;'>About The Model</h5>", unsafe_allow_html=True)
 st.markdown("<h6 style='text-align: center; color: white;'>This model is built using Support Vector Classifier(SVC) algorithm</h6>", unsafe_allow_html=True)
