@@ -3,3 +3,4 @@ pandas
 numpy
 pickle
 base64
+scikit-learn
