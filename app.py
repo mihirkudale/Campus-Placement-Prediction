@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle 
-import base64
 
 st.set_page_config(layout="wide")
 
@@ -117,4 +116,3 @@ if st.button("Predict Placement"):
 
 st.markdown("<h5 style='text-align: center; color: white;'>About The Model</h5>", unsafe_allow_html=True)
 st.markdown("<h6 style='text-align: center; color: white;'>This model is built using Support Vector Classifier(SVC) algorithm</h6>", unsafe_allow_html=True)
-
