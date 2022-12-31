@@ -1,1 +1,1 @@
-# campusx_placement_prediction
+# Campus Placement Prediction
