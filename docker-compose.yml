@@ -5,4 +5,4 @@ services:
       context: ./
 
     ports:
-      - "8081:8501"
+      - "8081:8501
